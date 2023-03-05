@@ -42,4 +42,9 @@ func main() {
 		}
 		fmt.Println(string(buffer[:n]))
 	}
+
+	err = os.Remove("aarquivo.txt")
+	if err != nil {
+		panic(err)
+	}
 }
