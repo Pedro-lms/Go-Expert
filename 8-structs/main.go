@@ -31,6 +31,14 @@ func Desativacao(pessoa Pessoa) {
 	pessoa.Desativar()
 }
 
+type Empresa struct {
+	Nome string
+}
+
+func (e Empresa) Desativar() {
+
+}
+
 func main() {
 
 	pedro := Client{

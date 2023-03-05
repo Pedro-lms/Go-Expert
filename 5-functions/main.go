@@ -1,5 +1,6 @@
 package main
 
+//funções
 import (
 	"errors"
 	"fmt"
