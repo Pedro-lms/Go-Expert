@@ -1,0 +1,16 @@
+package main
+
+import (
+	"io"
+	"net/http"
+)
+
+func main() {
+	req, err := http.Get("https://google.com")
+	if err != nil {
+		panic(err)
+	}
+	res, err := io.ReadAll(req.Body)
+	println(string(res))
+	req.Body.Close()
+}
