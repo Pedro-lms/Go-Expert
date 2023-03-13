@@ -26,7 +26,7 @@ func main() {
 	}
 
 	t := template.New("content.html")
-	t.Funcs(template.FuncMap{"ToUpper": ToUpper})
+	t.Funcs(template.FuncMap{"ToUpper": strings.ToUpper})
 	t = template.Must(t.ParseFiles(templates...))
 	err := t.Execute(os.Stdout, Cursos{
 		Curso{Nome: "C#", CargaHoraria: 10},
