@@ -1,0 +1,17 @@
+{{template "header.html"}}
+<body>
+    <h1>Cursos</h1>
+    <table>
+        <thead>
+                <th>Nome</th>
+                <th>Horas</th>
+        </thead>
+        <tbody>
+            {{ range .}}
+            <tr>
+                <td>{{.Nome | ToUpper }}</td>
+                <td>{{.CargaHoraria}}</td>
+            </tr>
+            {{ end }}
+
+{{template "footer.html"}}
