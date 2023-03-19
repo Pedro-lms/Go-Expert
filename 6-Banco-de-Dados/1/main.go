@@ -22,9 +22,45 @@ func NewProduct(name string, price float64) *Product {
 }
 
 func main() {
-	db, err := sql.Open("mysql", "root:root@tcp (localhost:3307)/goexpert")
+	db, err := sql.Open("mysql", "root:root@tcp(localhost:3306)/goexpert")
 	if err != nil {
 		panic(err)
 	}
 	defer db.Close()
+	product := NewProduct("Notebook", 2000.0)
+	err = insertProduct(db, product)
+	if err != nil {
+		panic(err)
+	}
+	product.Price = 100.0
+	err = updateProduct(db, product)
+	if err != nil {
+		panic(err)
+	}
+}
+
+func insertProduct(db *sql.DB, product *Product) error {
+	steatment, err := db.Prepare("INSERT INTO product(id, name, price) VALUES(?, ?, ?)")
+	if err != nil {
+		panic(err)
+	}
+	defer steatment.Close()
+	_, err = steatment.Exec(product.ID, product.Name, product.Price)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func updateProduct(db *sql.DB, product *Product) error {
+	steatment, err := db.Prepare("UPDATE product SET name = ?, price = ? WHERE id = ?")
+	if err != nil {
+		panic(err)
+	}
+	defer steatment.Close()
+	_, err = steatment.Exec(product.Name, product.Price, product.ID)
+	if err != nil {
+		return err
+	}
+	return nil
 }
