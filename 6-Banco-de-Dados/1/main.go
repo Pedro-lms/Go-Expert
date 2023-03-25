@@ -39,11 +39,11 @@ func main() {
 		panic(err)
 	}
 
-	// p, err := selectProduct(db, product.ID)
-	// if err != nil {
-	// 	panic(err)
-	// }
-	// fmt.Printf("Product: %v, has price %.2f", p.Name, p.Price)
+	p, err := selectProduct(db, product.ID)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Printf("Product: %v, has price %.2f", p.Name, p.Price)
 	products, err := selectAllProducts(db)
 	if err != nil {
 		panic(err)
@@ -80,22 +80,22 @@ func updateProduct(db *sql.DB, product *Product) error {
 	return nil
 }
 
-// func selectProduct(db *sql.DB, id string) (*Product, error) {
-// 	steatment, err := db.Prepare("SELECT id, name, price FROM product WHERE id = ?")
-// 	if err != nil {
-// 		return nil, err
-// 	}
-// 	defer steatment.Close()
-// 	var p Product
-// 	err = steatment.QueryRow(id).Scan(&p.ID, &p.Name, &p.Price)
-// 	if err != nil {
-// 		return nil, err
-// 	}
-// 	return &p, nil
-// }
+func selectProduct(db *sql.DB, id string) (*Product, error) {
+	steatment, err := db.Prepare("SELECT id, name, price FROM product WHERE id = ?")
+	if err != nil {
+		return nil, err
+	}
+	defer steatment.Close()
+	var p Product
+	err = steatment.QueryRow(id).Scan(&p.ID, &p.Name, &p.Price)
+	if err != nil {
+		return nil, err
+	}
+	return &p, nil
+}
 
 func selectAllProducts(db *sql.DB) ([]Product, error) {
-	rows, err := db.Query("SELECT id, name, price FROM products")
+	rows, err := db.Query("SELECT id, name, price FROM products where id = ?")
 	if err != nil {
 		return nil, err
 	}
@@ -110,4 +110,17 @@ func selectAllProducts(db *sql.DB) ([]Product, error) {
 		products = append(products, p)
 	}
 	return products, nil
+}
+
+func deleteProduct(db *sql.DB, id string) error {
+	steatment, err := db.Query("DELETE FROM products WHERE id = ?", id)
+	if err != nil {
+		return err
+	}
+	defer steatment.Close()
+	_, err = steatment.Exec(id)
+	if err != nil {
+		return err
+	}
+	return nil
 }
