@@ -3,12 +3,8 @@ module github.com/Pedro-lms/go-serverless
 go 1.19
 
 require (
-	github.com/go-sql-driver/mysql v1.7.0
-	github.com/google/uuid v1.3.0
-)
-
-require (
 	github.com/fsnotify/fsnotify v1.6.0 // indirect
+	github.com/go-sql-driver/mysql v1.7.0 // indirect
 	github.com/goccy/go-json v0.3.5 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/lestrrat-go/backoff/v2 v2.0.7 // indirect
@@ -38,5 +34,5 @@ require (
 	github.com/jinzhu/now v1.1.5 // indirect
 	github.com/spf13/viper v1.15.0
 	gorm.io/driver/mysql v1.4.7
-	gorm.io/gorm v1.24.6 // indirect
+	gorm.io/gorm v1.24.6
 )
