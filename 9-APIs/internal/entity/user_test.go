@@ -1,5 +1,11 @@
 package entity
 
+import (
+	"testing"
+
+	"github.com/stretchr/testify/assert"
+)
+
 func TestNewUser(t *testing.T) {
 	user, err := NewUser("Pedro", "Pedro@gmail.com", "123")
 	assert.Nil(t, err)

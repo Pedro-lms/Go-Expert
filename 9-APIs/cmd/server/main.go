@@ -1,6 +1,6 @@
 package main
 
-import "github.com/Pedro-lms/go-serverless/9-APIs/configs"
+import "github.com/Pedro-lms/goexpert/9-APIs/configs"
 
 func main() {
 	config, err := configs.LoadConfig(".")
