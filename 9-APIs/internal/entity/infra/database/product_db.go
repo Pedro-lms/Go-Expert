@@ -51,5 +51,5 @@ func (p *Product) Delete(id string) error {
 	if err != nil {
 		return err
 	}
-	return p.Db.Delete(product).Error
+	return p.Db.Delete(id).Error
 }
