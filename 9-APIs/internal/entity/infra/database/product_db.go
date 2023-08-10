@@ -47,9 +47,9 @@ func (p *Product) Update(product *entity.Product) error {
 }
 
 func (p *Product) Delete(id string) error {
-	_, err := p.FindById(id)
+	product, err := p.FindById(id)
 	if err != nil {
 		return err
 	}
-	return p.Db.Delete(id).Error
+	return p.Db.Delete(product).Error
 }
